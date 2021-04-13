@@ -71,10 +71,10 @@ class AtwoodMachine(VGroup):
         self.l2 = ValueTracker(self.right_mass_config["length"])
         self.theta1 = ValueTracker(self.left_mass_config["theta"])
         self.theta2 = ValueTracker(self.right_mass_config["theta"])
-        self.omega1 = ValueTracker(0)  # has to be zero for now
-        self.omega2 = ValueTracker(0)  # has to be zero for now
+        self.omega1 = ValueTracker(0) # has to be zero for now
+        self.omega2 = ValueTracker(0) # has to be zero for now
         self.x = ValueTracker(0)
-        self.v = ValueTracker(0)  # has to be zero for now
+        self.v = ValueTracker(0) # has to be zero for now
         self.create_pulleys()
         self.create_masses()
         self.create_string()
@@ -85,10 +85,10 @@ class AtwoodMachine(VGroup):
 
     def create_masses(self):
         self.left_mass = Mass(mass=self.left_mass_config["mass"],
-                              radius=self.left_mass_config["radius"]).move_to(
+                                radius=self.left_mass_config["radius"]).move_to(
             self.get_left_mass_position()).set_style(**self.left_mass_style)
         self.right_mass = Mass(mass=self.right_mass_config["mass"],
-                               radius=self.right_mass_config["radius"]).move_to(
+                                 radius=self.right_mass_config["radius"]).move_to(
             self.get_right_mass_position()).set_style(**self.right_mass_style)
         self.add(self.left_mass, self.right_mass)
 
@@ -126,12 +126,22 @@ class AtwoodMachine(VGroup):
         )
         return self.right_pulley.get_center() + u + v
 
-    def diffeq_system(y, t, g, r, m1, m2, c1, c2):
+    def diffeq_system(y, t, g, r, m1, m2, l1, l2):
         x, v, theta1, omega1, theta2, omega2 = y
-        l1 = r * theta1 - x + c1
-        l2 = r * theta2 + x - c2
         alfa1 = (omega1**2 * r - g * sin(theta1)) / l1
         alfa2 = (omega2**2 * r - g * sin(theta2)) / l2
         a = (m2 * (l2 * omega2**2 + g * cos(theta2)) -
              m1 * (l1 * omega1**2 + g * cos(theta1))) / (m1 + m2)
         return [v, a, omega1, alfa1, omega2, alfa2]
+
+    def step_solve(self, dt):
+        g, r = self.gravity, self.pulley_radius
+        m1, m2 = self.left_mass.mass, self.right_mass.mass
+        l1, l2 = self.l1.get_value(), self.l2.get_value()
+        x, v = self.x.get_value(), self.v.get_value()
+        theta1, omega1 = self.theta1.get_value(), self.omega1.get_value()
+        theta2, omega2 = self.theta2.get_value(), self.omega2.get_value()
+        y0 = [x, v, theta1, omega1, theta2, omega2]
+        args = [g, r, m1, m2, l1, l2]
+        t = [0, dt]
+        return odeint(self.diffeq_system, y0, t, args)
