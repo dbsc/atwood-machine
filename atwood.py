@@ -71,10 +71,10 @@ class AtwoodMachine(VGroup):
         self.l2 = ValueTracker(self.right_mass_config["length"])
         self.theta1 = ValueTracker(self.left_mass_config["theta"])
         self.theta2 = ValueTracker(self.right_mass_config["theta"])
-        self.omega1 = ValueTracker(0) # has to be zero for now
-        self.omega2 = ValueTracker(0) # has to be zero for now
+        self.omega1 = ValueTracker(0)  # has to be zero for now
+        self.omega2 = ValueTracker(0)  # has to be zero for now
         self.x = ValueTracker(0)
-        self.v = ValueTracker(0) # has to be zero for now
+        self.v = ValueTracker(0)  # has to be zero for now
         self.create_pulleys()
         self.create_masses()
         self.create_string()
@@ -85,10 +85,10 @@ class AtwoodMachine(VGroup):
 
     def create_masses(self):
         self.left_mass = Mass(mass=self.left_mass_config["mass"],
-                                radius=self.left_mass_config["radius"]).move_to(
+                              radius=self.left_mass_config["radius"]).move_to(
             self.get_left_mass_position()).set_style(**self.left_mass_style)
         self.right_mass = Mass(mass=self.right_mass_config["mass"],
-                                 radius=self.right_mass_config["radius"]).move_to(
+                               radius=self.right_mass_config["radius"]).move_to(
             self.get_right_mass_position()).set_style(**self.right_mass_style)
         self.add(self.left_mass, self.right_mass)
 
