@@ -165,3 +165,7 @@ class AtwoodMachine(VGroup):
 
     def get_right_pulley_center(self):
         return self.fixed_center.get_center() + RIGHT * self.separation / 2
+
+    @property
+    def current_scale(self):
+        return self.left_pulley.height / (2 * self.pulley_radius)
