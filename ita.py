@@ -28,10 +28,10 @@ class ITALogo(VGroup):
     }
 
     def __init__(self, width, **kwargs):
-        fire = SVGMobject("ita/fire.svg", False, None).set_style(**self.fire_style)
-        letters = SVGMobject("ita/letters.svg", False, None).set_style(**self.letters_style)
-        triangle = SVGMobject("ita/triangle.svg", False, None).set_style(**self.triangle_style)
-        wings = SVGMobject("ita/wings.svg", False, None).set_style(**self.wings_style)
+        fire = SVGMobject("svg/ita/fire.svg", False, None).set_style(**self.fire_style)
+        letters = SVGMobject("svg/ita/letters.svg", False, None).set_style(**self.letters_style)
+        triangle = SVGMobject("svg/ita/triangle.svg", False, None).set_style(**self.triangle_style)
+        wings = SVGMobject("svg/ita/wings.svg", False, None).set_style(**self.wings_style)
 
         mobjects = [fire, letters, triangle, wings]
         super().__init__(*mobjects, **kwargs)
