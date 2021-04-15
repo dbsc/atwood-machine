@@ -26,8 +26,8 @@ class AtwoodMachine(VGroup):
     gravity = 9.8
     friction = 0
     damping = 0
-    separation = 3
-    pulley_radius = 0.3
+    _separation = 3
+    _pulley_radius = 0.3
     initial_string_velocity = 0
     string_style = {
         "stroke_width": 0.4 * DEFAULT_STROKE_WIDTH,
@@ -97,18 +97,15 @@ class AtwoodMachine(VGroup):
         self.right_mass.get_center = self.get_right_mass_position
 
     def create_string(self):
-        self.string = AtwoodString(self.pulley_radius, self.fixed_center,
-                                   self.left_pulley, self.right_pulley,
-                                   self.left_mass, self.right_mass,
-                                   self.theta1, self.theta2)
+        self.string = AtwoodString(self)
         self.string.set_style(**self.string_style)
         self.add(self.string)
 
     def create_pulleys(self):
-        self.left_pulley = Pulley(radius=self.pulley_radius, num=3, ratio=0.25).move_to(
-            self.separation / 2 * LEFT).set_style(**self.pulley_style)
-        self.right_pulley = Pulley(radius=self.pulley_radius, num=3, ratio=0.25).move_to(
-            self.separation / 2 * RIGHT).set_style(**self.pulley_style)
+        self.left_pulley = Pulley(radius=self._pulley_radius, num=3, ratio=0.25).move_to(
+            self._separation / 2 * LEFT).set_style(**self.pulley_style)
+        self.right_pulley = Pulley(radius=self._pulley_radius, num=3, ratio=0.25).move_to(
+            self._separation / 2 * RIGHT).set_style(**self.pulley_style)
         self.add(self.left_pulley, self.right_pulley)
         self.left_pulley.get_center = self.get_left_pulley_center
         self.right_pulley.get_center = self.get_right_pulley_center
@@ -168,4 +165,12 @@ class AtwoodMachine(VGroup):
 
     @property
     def current_scale(self):
-        return self.left_pulley.height / (2 * self.pulley_radius)
+        return self.left_pulley.height / (2 * self._pulley_radius)
+
+    @property
+    def pulley_radius(self):
+        return self.current_scale * self._pulley_radius
+
+    @property
+    def separation(self):
+        return self.current_scale * self._separation
