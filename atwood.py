@@ -1,8 +1,8 @@
-from manim import *
-from scipy.integrate import odeint
-from diffeq import atwood_diffeq_system
 from mechanical_objects import AtwoodString, Mass, Pulley
+from diffeq import atwood_diffeq_system
 from polar import polar_to_cartesian
+from scipy.integrate import odeint
+from manim import *
 
 
 class AtwoodMachine(VGroup):
@@ -67,8 +67,10 @@ class AtwoodMachine(VGroup):
     def create_masses(self):
         left_mass_radius = self.left_mass_config["radius"]
         right_mass_radius = self.right_mass_config["radius"]
-        self.left_mass = Mass(radius=left_mass_radius).set_style(**self.left_mass_style)
-        self.right_mass = Mass(radius=right_mass_radius).set_style(**self.right_mass_style)
+        self.left_mass = Mass(radius=left_mass_radius).set_style(
+            **self.left_mass_style)
+        self.right_mass = Mass(radius=right_mass_radius).set_style(
+            **self.right_mass_style)
         self.left_mass.get_center = self.get_left_mass_position
         self.right_mass.get_center = self.get_right_mass_position
         self.left_mass.add_updater(lambda m: m.move_to(m.get_center()))
@@ -88,12 +90,18 @@ class AtwoodMachine(VGroup):
         self.add(self.left_pulley, self.right_pulley)
         self.left_pulley.get_center = self.get_left_pulley_center
         self.right_pulley.get_center = self.get_right_pulley_center
+        self.left_pulley.add_updater(left_pulley_updater(self))
+        self.right_pulley.add_updater(right_pulley_updater(self))
 
     def start(self):
+        self.left_pulley.clear_updaters()
+        self.right_pulley.clear_updaters()
         self.add_updater(gravity_updater)
 
     def stop(self):
         self.remove_updater(gravity_updater)
+        self.left_pulley.add_updater(left_pulley_updater(self))
+        self.right_pulley.add_updater(right_pulley_updater(self))
 
     def step_solve(self, dt):
         g, r = self.gravity, self.pulley_radius
@@ -107,16 +115,11 @@ class AtwoodMachine(VGroup):
         y0 = (x, v, theta1, omega1, theta2, omega2)
         args = (g, r, m1, m2, l1, l2)
         t = [0, dt]
+
         return odeint(atwood_diffeq_system, y0, t, args=args)[1]
 
     def set_string_velocity(self, v):
         self.v = v
-
-    def set_theta1(self, theta):
-        self.theta1.set_value(theta)
-
-    def set_theta2(self, theta):
-        self.theta2.set_value(theta)
 
     def set_omega1(self, omega):
         self.omega1 = omega
@@ -124,20 +127,17 @@ class AtwoodMachine(VGroup):
     def set_omega2(self, omega):
         self.omega2 = omega
 
-    def set_l1(self, l):
-        self.l1.set_value(l)
-
-    def set_l2(self, l):
-        self.l2.set_value(l)
-
     def get_left_mass_position(self):
-        u = polar_to_cartesian(self.pulley_radius, PI - self.theta1.get_value())
-        v = polar_to_cartesian(self.l1.get_value(), 3 * PI / 2 - self.theta1.get_value())
+        u = polar_to_cartesian(self.pulley_radius, PI -
+                               self.theta1.get_value())
+        v = polar_to_cartesian(self.l1.get_value(), 3 *
+                               PI / 2 - self.theta1.get_value())
         return self.get_left_pulley_center() + u + v
 
     def get_right_mass_position(self):
         u = polar_to_cartesian(self.pulley_radius, self.theta2.get_value())
-        v = polar_to_cartesian(self.l2.get_value(), self.theta2.get_value() - PI / 2)
+        v = polar_to_cartesian(self.l2.get_value(),
+                               self.theta2.get_value() - PI / 2)
         return self.get_right_pulley_center() + u + v
 
     def get_left_pulley_center(self):
@@ -166,3 +166,29 @@ def gravity_updater(m, dt):
     m.l2.set_value(l2)
     m.left_pulley.rotate(-x / m.pulley_radius)
     m.right_pulley.rotate(-x / m.pulley_radius)
+
+
+def left_pulley_updater(atwood):
+    atwood.last_l1 = atwood.l1.get_value()
+    atwood.last_theta1 = atwood.theta1.get_value()
+
+    def updater(m):
+        x = atwood.l1.get_value() - atwood.last_l1 - atwood.pulley_radius * (
+            atwood.theta1.get_value() - atwood.last_theta1)
+        m.rotate(x / atwood.pulley_radius)
+        atwood.last_l1 = atwood.l1.get_value()
+        atwood.last_theta1 = atwood.theta1.get_value()
+    return updater
+
+
+def right_pulley_updater(atwood):
+    atwood.last_l2 = atwood.l2.get_value()
+    atwood.last_theta2 = atwood.theta2.get_value()
+
+    def updater(m):
+        x = - atwood.l2.get_value() + atwood.last_l2 + atwood.pulley_radius * (
+            atwood.theta2.get_value() - atwood.last_theta2)
+        m.rotate(x / atwood.pulley_radius)
+        atwood.last_l2 = atwood.l2.get_value()
+        atwood.last_theta2 = atwood.theta2.get_value()
+    return updater
