@@ -1,7 +1,7 @@
 from manim import *
 from scipy.integrate import odeint
 from diffeq import atwood_diffeq_system
-from mechanical_objects import AtwoodString, Mass, Pulley
+from mechanical_objects import AtwoodString, Mass, Pulley, PhantomPoint
 from polar import polar_to_cartesian
 
 
@@ -26,8 +26,8 @@ class AtwoodMachine(VGroup):
     gravity = 9.8
     friction = 0
     damping = 0
-    _separation = 3
-    _pulley_radius = 0.3
+    separation = 3
+    pulley_radius = 0.2
     initial_string_velocity = 0
     string_style = {
         "stroke_width": 0.4 * DEFAULT_STROKE_WIDTH,
@@ -35,14 +35,14 @@ class AtwoodMachine(VGroup):
     left_mass_config = {
         "radius": 0.1,
         "length": 2,
-        "theta": 30 * DEGREES,
+        "theta": 0,
         "omega": 0,
-        "mass": 0.95,
+        "mass": 1,
     }
     right_mass_config = {
         "radius": 0.1,
         "length": 2,
-        "theta": 0 * DEGREES,
+        "theta": 0,
         "omega": 0,
         "mass": 1,
     }
@@ -80,7 +80,7 @@ class AtwoodMachine(VGroup):
         self.create_string()
 
     def create_fixed_center(self):
-        self.fixed_center = VectorizedPoint()
+        self.fixed_center = PhantomPoint()
         self.add(self.fixed_center)
 
     def create_masses(self):
@@ -102,10 +102,10 @@ class AtwoodMachine(VGroup):
         self.add(self.string)
 
     def create_pulleys(self):
-        self.left_pulley = Pulley(radius=self._pulley_radius, num=3, ratio=0.25).move_to(
-            self._separation / 2 * LEFT).set_style(**self.pulley_style)
-        self.right_pulley = Pulley(radius=self._pulley_radius, num=3, ratio=0.25).move_to(
-            self._separation / 2 * RIGHT).set_style(**self.pulley_style)
+        self.left_pulley = Pulley(radius=self.current_pulley_radius, num=3, ratio=0.15).move_to(
+            self.current_separation / 2 * LEFT).set_style(**self.pulley_style)
+        self.right_pulley = Pulley(radius=self.current_pulley_radius, num=3, ratio=0.15).move_to(
+            self.current_separation / 2 * RIGHT).set_style(**self.pulley_style)
         self.add(self.left_pulley, self.right_pulley)
         self.left_pulley.get_center = self.get_left_pulley_center
         self.right_pulley.get_center = self.get_right_pulley_center
@@ -144,7 +144,7 @@ class AtwoodMachine(VGroup):
             self.pulley_radius, PI - self.theta1.get_value()
         )
         v = polar_to_cartesian(
-            self.l1.get_value(), 3 * PI / 2 - self.theta1.get_value()
+            self.current_scale * self.l1.get_value(), 3 * PI / 2 - self.theta1.get_value()
         )
         return self.get_left_pulley_center() + u + v
 
@@ -153,24 +153,24 @@ class AtwoodMachine(VGroup):
             self.pulley_radius, self.theta2.get_value()
         )
         v = polar_to_cartesian(
-            self.l2.get_value(), self.theta2.get_value() - PI / 2
+            self.current_scale * self.l2.get_value(), self.theta2.get_value() - PI / 2
         )
         return self.get_right_pulley_center() + u + v
 
     def get_left_pulley_center(self):
-        return self.fixed_center.get_center() + LEFT * self.separation / 2
+        return self.fixed_center.get_center() + LEFT * self.current_separation / 2
 
     def get_right_pulley_center(self):
-        return self.fixed_center.get_center() + RIGHT * self.separation / 2
+        return self.fixed_center.get_center() + RIGHT * self.current_separation / 2
 
     @property
     def current_scale(self):
-        return self.left_pulley.height / (2 * self._pulley_radius)
+        return self.fixed_center.current_scale
 
     @property
-    def pulley_radius(self):
-        return self.current_scale * self._pulley_radius
+    def current_pulley_radius(self):
+        return self.current_scale * self.pulley_radius
 
     @property
-    def separation(self):
-        return self.current_scale * self._separation
+    def current_separation(self):
+        return self.current_scale * self.separation
