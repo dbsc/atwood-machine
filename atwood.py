@@ -5,23 +5,6 @@ from mechanical_objects import AtwoodString, Mass, Pulley, PhantomPoint
 from polar import polar_to_cartesian
 
 
-def atwood_gravity_updater(m: 'AtwoodMachine', dt):
-    x, v, theta1, omega1, theta2, omega2 = m.step_solve(dt)
-    l1 = m.l1.get_value() - x + m.pulley_radius * (theta1 - m.theta1.get_value())
-    l2 = m.l2.get_value() + x + m.pulley_radius * (theta2 - m.theta2.get_value())
-
-    m.set_string_velocity(v)
-    m.theta1.set_value(theta1)
-    m.set_omega1(omega1)
-    m.theta2.set_value(theta2)
-    m.set_omega2(omega2)
-
-    m.l1.set_value(l1)
-    m.l2.set_value(l2)
-    m.left_pulley.rotate(-x / m.pulley_radius)
-    m.right_pulley.rotate(-x / m.pulley_radius)
-
-
 class AtwoodMachine(VGroup):
     gravity = 9.8
     friction = 0
@@ -174,3 +157,21 @@ class AtwoodMachine(VGroup):
     @property
     def current_separation(self):
         return self.current_scale * self.separation
+
+
+def atwood_gravity_updater(m, dt):
+    x, v, theta1, omega1, theta2, omega2 = m.step_solve(dt)
+    l1 = m.l1.get_value() - x + m.pulley_radius * (theta1 - m.theta1.get_value())
+    l2 = m.l2.get_value() + x + m.pulley_radius * (theta2 - m.theta2.get_value())
+
+    m.set_string_velocity(v)
+    m.theta1.set_value(theta1)
+    m.set_omega1(omega1)
+    m.theta2.set_value(theta2)
+    m.set_omega2(omega2)
+
+    m.l1.set_value(l1)
+    m.l2.set_value(l2)
+    m.left_pulley.rotate(-x / m.pulley_radius)
+    m.right_pulley.rotate(-x / m.pulley_radius)
+
