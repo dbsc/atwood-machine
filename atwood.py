@@ -43,9 +43,21 @@ class AtwoodMachine(VGroup):
         "stroke_color": WHITE,
         "stroke_width": 0.25 * DEFAULT_STROKE_WIDTH,
     }
+    VALID_PARAMETERS = [
+        'gravity',
+        'separation',
+        'pulley_radius',
+        'initial_string_velocity',
+        'left_mass_style',
+        'right_mass_style',
+        'pulley_style',
+    ]
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, **params):
+        super().__init__()
+        for key, value in params.items():
+            if key in self.VALID_PARAMETERS:
+                setattr(self, key, value)
         self.theta1 = ValueTracker(self.left_mass_config["theta"])
         self.theta2 = ValueTracker(self.right_mass_config["theta"])
         self.l1 = ValueTracker(self.left_mass_config["length"])
