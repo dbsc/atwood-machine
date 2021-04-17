@@ -12,12 +12,13 @@ class Mass(Circle):
 class Pulley(VGroup):
 
     def __init__(self, radius, num, ratio, **kwargs):
-        circle = Circle(radius=radius)
+        self.circle = Circle(radius=radius)
         crosses = []
         for i in range(num):
             crosses.append(Line(0.5 * ratio * LEFT, 0.5 * ratio *
                            RIGHT).rotate(PI * i / num))
-        super().__init__(circle, *crosses, **kwargs)
+        self.crosses = VGroup(*crosses)
+        super().__init__(self.circle, self.crosses, **kwargs)
 
 
 class AtwoodString(VGroup):
