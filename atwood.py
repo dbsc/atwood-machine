@@ -1,6 +1,6 @@
 from mechanical_objects import AtwoodString, Mass, Pulley
 from diffeq import atwood_diffeq_system
-from polar import polar_to_cartesian
+from misc import polar_to_cartesian, stretch
 from scipy.integrate import odeint
 from manim import *
 
@@ -108,14 +108,17 @@ class AtwoodMachine(VGroup):
     def start(self):
         self.left_pulley.clear_updaters()
         self.right_pulley.clear_updaters()
-        self.add_updater(gravity_updater)
+        self.set_speed(1)
 
     def stop(self):
-        self.remove_updater(gravity_updater)
+        self.remove_updater(self.gravity_updater)
         self.left_pulley.add_updater(left_pulley_updater(self))
         self.right_pulley.add_updater(right_pulley_updater(self))
 
     def step_solve(self, dt):
+        return self.get_graph([0, dt])[1]
+
+    def get_graph(self, t):
         g, r = self.gravity, self.pulley_radius
         m1, m2 = self.m1, self.m2
         l1, l2 = self.l1.get_value(), self.l2.get_value()
@@ -126,9 +129,8 @@ class AtwoodMachine(VGroup):
 
         y0 = (x, v, theta1, omega1, theta2, omega2)
         args = (g, r, m1, m2, l1, l2)
-        t = [0, dt]
 
-        return odeint(atwood_diffeq_system, y0, t, args=args)[1]
+        return odeint(atwood_diffeq_system, y0, t, args=args)
 
     def set_string_velocity(self, v):
         self.v = v
@@ -161,6 +163,68 @@ class AtwoodMachine(VGroup):
     @property
     def fixed_center(self):
         return self.fixed_point.get_center()
+
+    def set_speed(self, ratio):
+        def updater(m, dt):
+            return gravity_updater(m, ratio * dt)
+        self.add_updater(updater)
+        self.gravity_updater = updater
+
+
+class AtwoodMachineWithMeasurements(AtwoodMachine):
+
+    def __init__(self, **params):
+        super().__init__(**params)
+        self.create_braces()
+        self.create_angles()
+
+    def create_braces(self, buff=MED_SMALL_BUFF):
+        self.left_brace = always_redraw(lambda: stretch(
+            Brace(self.left_line, self.left_brace_dir, buff),
+            0.5, self.left_brace_dir
+        ))
+        self.right_brace = always_redraw(lambda: stretch(
+            Brace(self.right_line, direction=self.right_brace_dir),
+            0.5, self.right_brace_dir
+        ))
+
+    def get_left_brace_tex(self, *tex, buff=MED_LARGE_BUFF, scale=0.5):
+        tex = f_always(
+            self.left_brace.get_tex(*tex).scale(scale).move_to,
+            lambda: self.left_line.get_center() + self.left_brace_dir * buff
+        )
+        return tex
+
+    def get_right_brace_tex(self, *tex, buff=MED_LARGE_BUFF, scale=0.5):
+        tex = f_always(
+            self.right_brace.get_tex(*tex).scale(scale).move_to,
+            lambda: self.right_line.get_center() + self.right_brace_dir * buff
+        )
+        return tex
+
+    @property
+    def left_line(self):
+        return self.string.left_line
+
+    @property
+    def right_line(self):
+        return self.string.right_line
+
+    @property
+    def left_line_dir(self):
+        return self.string.left_line.get_unit_vector()
+
+    @property
+    def right_line_dir(self):
+        return self.string.right_line.get_unit_vector()
+
+    @property
+    def left_brace_dir(self):
+        return self.left_line.copy().rotate(-PI / 2).get_unit_vector()
+
+    @property
+    def right_brace_dir(self):
+        return self.right_line.copy().rotate(PI / 2).get_unit_vector()
 
 
 def gravity_updater(m, dt):
