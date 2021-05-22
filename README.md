@@ -59,7 +59,6 @@ We can introduce a new variable such that
 
 The Lagrangian theory will tell us that we have the following system describes the motion of system
 
-<br>
 <div align="center">
   <img src="./tex/lagrangian_system_white.svg" width="147.6">
 </div>
