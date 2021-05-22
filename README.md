@@ -66,7 +66,6 @@ The Lagrangian theory will tell us that we have the following system describes t
 
 Computing the partial derivatives, we arrive at the following system of differential equations
 
-<br>
 <div align="center">
   <img src="./tex/final_system_white.svg" width="486.6">
 </div>
