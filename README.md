@@ -18,13 +18,13 @@ V_equation 1113
 x_variable 458
 
 <div align="center">
-  <img src="./tex/atwood_image_white.svg" width="541">
+  <img src="./tex/atwood_image_white.svg" width="450">
 </div>
 
-Considering the pulley to have a radius <img src="./tex/r_white.svg" width="10">, we have
+Considering the pulley to have a radius   <img src="./tex/r_white.svg" width="10">, we have
 
 <div align="center">
-  <img src="./tex/L_equation_white.svg" width="589">
+  <img src="./tex/L_equation_white.svg" width="450">
 </div>
 
 <div align="center">
@@ -36,5 +36,33 @@ and the lagrangian will be
 <div align="center">
   <img src="./tex/lagrangian_equation_white.svg" width="100">
 </div>
+
+Notice the following relation
+
+<div align="center">
+  <img src="./tex/relation_equation_white.svg" width="100">
+</div>
+
+We can introduce a new variable such that
+
+<div align="center">
+  <img src="./tex/x_variable_white.svg" width="100">
+</div>
+
+The Lagrangian theory will tell us that we have the following system describes the motion of system
+
+<div align="center">
+  <img src="./tex/lagrangian_system_white.svg" width="100">
+</div>
+
+Computing the partial derivative we arrive at the following system of differential equations
+
+<div align="center">
+  <img src="./tex/final_system_white.svg" width="100">
+</div>
+
+
+
+
 
 
