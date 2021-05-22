@@ -18,16 +18,17 @@ V_equation 1113
 x_variable 458
 
 <div align="center">
-  <img src="./tex/atwood_image_white.svg" width="500">
+  <img src="./tex/atwood_image_white.svg" width="541">
 </div>
 
 Considering the pulley to have a radius <img src="./tex/r_white.svg" width="10">, we have
 
 <div align="center">
-  <img src="./tex/L_equation_white.svg" width="75%">
+  <img src="./tex/L_equation_white.svg" width="589">
 </div>
+
 <div align="center">
-  <img src="./tex/V_equation_white.svg" width="75%">
+  <img src="./tex/V_equation_white.svg" width="556.5">
 </div>
 
 and the lagrangian will be
