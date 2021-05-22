@@ -25,7 +25,7 @@ x_variable 458 -->
   <img src="./tex/atwood_image_white.svg" width="450">
 </div>
 
-Considering the pulley to have a radius   <img src="./tex/r_white.svg" width="9.3">, we have
+Considering that both pulleys have a radius equal to <img src="./tex/r_white.svg" width="9.3">, we have
 
 <div align="center">
   <img src="./tex/L_equation_white.svg" width="490">
