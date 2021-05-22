@@ -32,38 +32,38 @@ Considering the pulley to have a radius   <img src="./tex/r_white.svg" width="9.
 </div>
 <br>
 <div align="center">
-  <img src="./tex/V_equation_white.svg" width="519">
+  <img src="./tex/V_equation_white.svg" width="463">
 </div>
 <br>
 
 and the lagrangian will be
 
 <div align="center">
-  <img src="./tex/lagrangian_equation_white.svg" width="94.3">
+  <img src="./tex/lagrangian_equation_white.svg" width="84">
 </div>
 
 Notice the following relation
 
 <div align="center">
-  <img src="./tex/relation_equation_white.svg" width="195">
+  <img src="./tex/relation_equation_white.svg" width="174">
 </div>
 
 We can introduce a new variable such that
 
 <div align="center">
-  <img src="./tex/x_variable_white.svg" width="214">
+  <img src="./tex/x_variable_white.svg" width="190.5">
 </div>
 
 The Lagrangian theory will tell us that we have the following system describes the motion of system
 
 <div align="center">
-  <img src="./tex/lagrangian_system_white.svg" width="165.7">
+  <img src="./tex/lagrangian_system_white.svg" width="147.6">
 </div>
 
 Computing the partial derivatives, we arrive at the following system of differential equations
 
 <div align="center">
-  <img src="./tex/final_system_white.svg" width="546">
+  <img src="./tex/final_system_white.svg" width="486.6">
 </div>
 
 This system of equations can be solved with the excellent [scipy](https://docs.scipy.org/doc/scipy/reference/) scientific computing library, and in this case, we are using the [odeint](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html) function.
