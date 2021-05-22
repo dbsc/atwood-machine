@@ -3,11 +3,15 @@
 
 A simple simulation of an Atwood machine achieved with [manim](github.com).
 
+If you can't see the figures and/or the equations, please checkout the [light theme version of this README](README_light.md).
+
 ## Mathematical Background
 
 We'll derivate the equations of motion with the aid of [Lagrangian mechanics](https://en.wikipedia.org/wiki/Lagrangian_mechanics)
 
-atwood_image 1082
+<!-- Dimesions of each image -->
+
+<!-- atwood_image 1082
 final_system 1170
 lagrangian_equation 202
 lagrangian_system 355
@@ -15,7 +19,7 @@ L_equation 1178
 r 20
 relation_equation 418
 V_equation 1113
-x_variable 458
+x_variable 458 -->
 
 <div align="center">
   <img src="./tex/atwood_image_white.svg" width="450">
@@ -56,14 +60,10 @@ The Lagrangian theory will tell us that we have the following system describes t
   <img src="./tex/lagrangian_system_white.svg" width="165.7">
 </div>
 
-Computing the partial derivative we arrive at the following system of differential equations
+Computing the partial derivatives, we arrive at the following system of differential equations
 
 <div align="center">
   <img src="./tex/final_system_white.svg" width="546">
 </div>
 
-
-
-
-
-
+This system of equations can be solved with the excellent [scipy](https://docs.scipy.org/doc/scipy/reference/) scientific computing library, and in this case, we are using the [odeint](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html) function.
