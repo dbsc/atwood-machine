@@ -28,7 +28,7 @@ Considering the pulley to have a radius   <img src="./tex/r_white.svg" width="10
 </div>
 
 <div align="center">
-  <img src="./tex/V_equation_white.svg" width="556.5">
+  <img src="./tex/V_equation_white.svg" width="519">
 </div>
 
 and the lagrangian will be
