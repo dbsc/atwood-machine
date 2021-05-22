@@ -28,7 +28,7 @@ x_variable 458 -->
 Considering the pulley to have a radius   <img src="./tex/r_white.svg" width="9.3">, we have
 
 <div align="center">
-  <img src="./tex/L_equation_white.svg" width="550">
+  <img src="./tex/L_equation_white.svg" width="490">
 </div>
 <br>
 <div align="center">
