@@ -50,20 +50,26 @@ Notice the following relation
 
 We can introduce a new variable such that
 
+<br>
 <div align="center">
   <img src="./tex/x_variable_white.svg" width="190.5">
 </div>
+<br>
 
 The Lagrangian theory will tell us that we have the following system describes the motion of system
 
+<br>
 <div align="center">
   <img src="./tex/lagrangian_system_white.svg" width="147.6">
 </div>
+<br>
 
 Computing the partial derivatives, we arrive at the following system of differential equations
 
+<br>
 <div align="center">
   <img src="./tex/final_system_white.svg" width="486.6">
 </div>
+<br>
 
 This system of equations can be solved with the excellent [scipy](https://docs.scipy.org/doc/scipy/reference/) scientific computing library, and in this case, we are using the [odeint](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html) function.
