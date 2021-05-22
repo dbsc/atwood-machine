@@ -50,11 +50,9 @@ Notice the following relation
 
 We can introduce a new variable such that
 
-<br>
 <div align="center">
   <img src="./tex/x_variable_white.svg" width="190.5">
 </div>
-<br>
 
 The Lagrangian theory will tell us that we have the following system describes the motion of system
 
