@@ -9,17 +9,19 @@ We'll derivate the equations of motion with the aid of [Lagrangian mechanics](ht
 
 
 <div align="center">
-  <img src="./tex/atwood_image.svg" width="500" style="filter: invert(1)">
+  <img src="./tex/atwood_image_white.svg" width="500">
 </div>
 
-
+Considering the pulley to have a radius <img src="./tex/r_white.svg">, we have
 
 <div align="center">
-  <img src="./T_def.svg" style="width:85%; filter: invert(1)">
+  <img src="./tex/L_equation_white.svg" width="500">
+</div>
+<div align="center">
+  <img src="./tex/V_equation_white.svg">
+</div>
+<div align="center">
+  <img src="./tex/.svg" width="500">
 </div>
 
-<!-- <style>
-img {
-  filter: invert(100%)
-}
-</style> -->
+
