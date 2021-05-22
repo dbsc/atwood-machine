@@ -32,7 +32,7 @@ Considering the pulley to have a radius   <img src="./tex/r_white.svg" width="9.
 </div>
 <br>
 <div align="center">
-  <img src="./tex/V_equation_white.svg" width="463">
+  <img src="./tex/V_equation_white.svg" width="470">
 </div>
 <br>
 
