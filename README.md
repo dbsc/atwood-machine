@@ -57,12 +57,14 @@ We can introduce a new variable such that
 </div>
 <br>
 
-The Lagrangian theory will tell us that we have the following system describes the motion of system
+The Lagrangian theory tells us that the system of equations
 
 <div align="center">
   <img src="./tex/lagrangian_system_white.svg" width="147.6">
 </div>
 <br>
+
+describes the motion of all the particles in the system.
 
 Computing the partial derivatives, we arrive at the following system of differential equations
 
@@ -71,4 +73,4 @@ Computing the partial derivatives, we arrive at the following system of differen
 </div>
 <br>
 
-This system of equations can be solved with the excellent [scipy](https://docs.scipy.org/doc/scipy/reference/) scientific computing library, and in this case, we are using the [odeint](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html) function.
+This system of equations can be solved with the excellent [scipy](https://docs.scipy.org/doc/scipy/reference/) scientific computing library, and in this project, I am using the [odeint](https://docs.scipy.org/doc/scipy/reference/generated/scipy.integrate.odeint.html) function.
