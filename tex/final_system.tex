@@ -1,0 +1,12 @@
+\documentclass[preview, convert={outfile=\jobname.svg}]{standalone}
+\usepackage{amsmath}
+
+\begin{document}
+\begin{equation*}
+    \begin{cases}
+            l_1\ddot{\theta_1} + 2\dot{l_1}\dot{\theta_1} = -g\sin\theta_1 + r\dot{\theta_1}^2 \\
+            l_2\ddot{\theta_2} + 2\dot{l_2}\dot{\theta_2} = -g\sin\theta_2 + r\dot{\theta_2}^2 \\
+                (m_1 + m_2)\ddot{x} = -m_1g\cos\theta_1 + m_2g\cos\theta_2 - m_1l_1\dot{\theta_1}^2 + m_2l_2\dot{\theta_2}^2
+    \end{cases}\!\!\!.
+\end{equation*}
+\end{document}
