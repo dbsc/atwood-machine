@@ -9,17 +9,17 @@ We'll derivate the equations of motion with the aid of [Lagrangian mechanics](ht
 
 
 <div align="center">
-  <img src="./tex/atwood_image.svg" width="500">
+  <img src="./tex/atwood_image.svg" width="500" style="filter: invert(1)">
 </div>
 
 
 
 <div align="center">
-  <img src="./T_def.svg" style="width:85%">
+  <img src="./T_def.svg" style="width:85%; filter: invert(1)">
 </div>
 
-<style>
+<!-- <style>
 img {
   filter: invert(100%)
 }
-</style>
+</style> -->
