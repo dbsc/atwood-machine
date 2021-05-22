@@ -41,18 +41,21 @@ and the lagrangian will be
 <div align="center">
   <img src="./tex/lagrangian_equation_white.svg" width="84">
 </div>
+<br>
 
 Notice the following relation
 
 <div align="center">
   <img src="./tex/relation_equation_white.svg" width="174">
 </div>
+<br>
 
 We can introduce a new variable such that
 
 <div align="center">
   <img src="./tex/x_variable_white.svg" width="190.5">
 </div>
+<br>
 
 The Lagrangian theory will tell us that we have the following system describes the motion of system
 
