@@ -4,6 +4,8 @@
 \usetikzlibrary{calc}
 \usetikzlibrary{decorations.pathreplacing,angles,quotes}
 \usetikzlibrary{calligraphy}
+\usepackage{xcolor}
+\color[rgb]{1,1,1}
 
 \begin{document}
 \begin{tikzpicture}
@@ -38,15 +40,15 @@
 % \draw [line width=0.5*\pulleywidth] (left_pulley) circle [radius=0.5*\pulleyradius];
 \draw [line width=\pulleywidth] (right_pulley) circle [radius=\pulleyradius];
 % \draw [line width=0.5*\pulleywidth] (right_pulley) circle [radius=0.5*\pulleyradius];
-\draw (left_mass) [fill=black] circle [radius=\massradius];
-\draw (right_mass) [fill=black]circle [radius=\massradius];
+\draw (left_mass) [fill=white, white] circle [radius=\massradius];
+\draw (right_mass) [fill=white, white]circle [radius=\massradius];
 % \draw [decoration={brace, mirror, raise=5pt}, decorate] (left_touch) -- node [below=6pt] {$x$} (left_mass);
-\draw[decoration={calligraphic brace, amplitude=5pt, raise=10pt}, decorate, line width=1pt] (left_mass) -- (left_touch);
-\draw[decoration={calligraphic brace, amplitude=5pt, raise=10pt}, decorate, line width=1pt] (right_touch) -- (right_mass);
+\draw [pen colour={white}, fill=white, decoration={calligraphic brace, amplitude=5pt, raise=10pt}, decorate, line width=1pt] (left_mass) -- (left_touch);
+\draw [pen colour={white}, fill=white, decoration={calligraphic brace, amplitude=5pt, raise=10pt}, decorate, line width=1pt] (right_touch) -- (right_mass);
 \node at (l1_node) {$l_1$};
 \node at (l2_node) {$l_2$};
-\draw [dashed, line width=\dashedwidth] ($(left_pulley) + (0, -\pulleyradius - 0.1)$) -- (left_pulley |- left_mass);
-\draw [dashed, line width=\dashedwidth] ($(right_pulley) + (0, -\pulleyradius - 0.1)$) -- (right_pulley |- right_mass);
+\draw [dashed, line width=\dashedwidth, white] ($(left_pulley) + (0, -\pulleyradius - 0.1)$) -- (left_pulley |- left_mass);
+\draw [dashed, line width=\dashedwidth, white] ($(right_pulley) + (0, -\pulleyradius - 0.1)$) -- (right_pulley |- right_mass);
 % \draw [dashed] let \p1 = (left_mass) in (left_pulley) -- (0, \y1);
 \coordinate (left_pulley_mass) at (left_pulley |- left_mass);
 \coordinate (right_pulley_mass) at (right_pulley |- right_mass);
