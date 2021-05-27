@@ -5,6 +5,14 @@ A simple simulation of an Atwood machine achieved with [manim](github.com).
 
 If you can't see the figures and/or the equations, please checkout the [light theme version of this README](README_light.md).
 
+<div align="center">
+  <img src="simulation.gif" width="450">
+</div>
+
+<div align="center">
+  <img src="ita_logo.gif" width="450">
+</div>
+
 ## Mathematical Background
 
 We'll derivate the equations of motion with the aid of [Lagrangian mechanics](https://en.wikipedia.org/wiki/Lagrangian_mechanics)
