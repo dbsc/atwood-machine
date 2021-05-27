@@ -7,7 +7,7 @@ from manim import *
 class ShowITALogo(Scene):
     def construct(self):
         ita = ITALogo(8)
-        self.add(ita)
+        self.play(DrawBorderThenFill(ita, run_time=3))
         self.wait()
 
 
