@@ -1,5 +1,4 @@
 from numpy import sin, cos, arccos, sqrt
-from numpy.linalg import norm
 from manim import RIGHT, UP, PI
 
 
