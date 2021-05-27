@@ -27,9 +27,9 @@ class TreatPulley(VGroup):
     }
 
     def __init__(self, radius, **kwargs):
-        red = SVGMobject("svg/pulley_white.svg", False,
+        red = SVGMobject("svg/pulley_a.svg", False,
                          None).set_style(**self.red_style)
-        white = SVGMobject("svg/pulley_red.svg", False,
+        white = SVGMobject("svg/pulley_b.svg", False,
                            None).set_style(**self.white_style)
 
         mobjects = [white, red]
@@ -40,9 +40,9 @@ class TreatPulley(VGroup):
 
 class Pulley(VGroup):
 
-    def __init__(self, radius, num=3, ratio=0.5, **kwargs):
+    def __init__(self, radius, num=3, ratio=0.4, **kwargs):
         self.circle = Circle(radius=radius)
-        line = Line(ratio * LEFT, ratio * RIGHT)
+        line = Line(ratio * radius * LEFT, ratio * radius * RIGHT)
         crosses = []
         for i in range(num):
             crosses.append(line.copy().rotate(PI * i / num))

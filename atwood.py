@@ -1,7 +1,8 @@
-from mechanical_objects import AtwoodString, Mass, Pulley
+from mechanical_objects import AtwoodString, Mass, Pulley, TreatPulley
 from diffeq import atwood_diffeq_system
 from misc import polar_to_cartesian
 from scipy.integrate import odeint
+from math import sqrt
 from manim import *
 
 
@@ -106,7 +107,8 @@ class AtwoodMachine(VGroup):
 
     def start(self):
         """Start the simulation."""
-        self.add_updater(gravity_updater)
+        if self.valid_pos:
+            self.add_updater(gravity_updater)
 
     def stop(self):
         """Stop the simulation."""
@@ -152,7 +154,7 @@ class AtwoodMachine(VGroup):
 
     @property
     def midpoint_center(self):
-        """The midpoint between the two pulleys"""
+        """The midpoint between the two pulleys."""
         return self.midpoint.get_center()
 
     def step_solve(self, dt):
@@ -176,6 +178,33 @@ class AtwoodMachine(VGroup):
 
         return odeint(atwood_diffeq_system, y0, t, args=args)
 
+    @property
+    def valid_pos(self):
+        """Whether the current position is valid."""
+        dist1 = sqrt(self.pulley_radius**2 + self.l1.get_value()**2)
+        dist2 = sqrt(self.pulley_radius**2 + self.l2.get_value()**2)
+        return dist1 > self.pulley_radius + self.left_mass.radius and \
+               dist2 > self.pulley_radius + self.right_mass.radius
+
+
+class TreatMachine(AtwoodMachine):
+    def _create_pulleys(self):
+        self.left_pulley = TreatPulley(self.pulley_radius)
+        self.left_pulley.move_to(self.separation / 2 * LEFT)
+        self.left_pulley.set_style(**self.pulley_style)
+
+        self.right_pulley = TreatPulley(self.pulley_radius)
+        self.right_pulley.move_to(self.separation / 2 * RIGHT)
+        self.right_pulley.set_style(**self.pulley_style)
+
+        self.left_pulley.get_center = self.left_pulley_center
+        self.right_pulley.get_center = self.right_pulley_center
+
+        self.left_pulley.add_updater(left_pulley_updater(self))
+        self.right_pulley.add_updater(right_pulley_updater(self))
+
+        self.add(self.left_pulley, self.right_pulley)
+
 
 def gravity_updater(m: AtwoodMachine, dt):
     """Updater function that describes the motion of the system."""
@@ -183,13 +212,14 @@ def gravity_updater(m: AtwoodMachine, dt):
     l1 = m.l1.get_value() - x + m.pulley_radius * (theta1 - m.theta1.get_value())
     l2 = m.l2.get_value() + x + m.pulley_radius * (theta2 - m.theta2.get_value())
 
-    m.set_velocity(v)
-    m.l1.set_value(l1)
-    m.l2.set_value(l2)
-    m.set_omega1(omega1)
-    m.set_omega2(omega2)
-    m.theta2.set_value(theta2)
-    m.theta1.set_value(theta1)
+    if m.valid_pos:
+        m.set_velocity(v)
+        m.l1.set_value(l1)
+        m.l2.set_value(l2)
+        m.set_omega1(omega1)
+        m.set_omega2(omega2)
+        m.theta2.set_value(theta2)
+        m.theta1.set_value(theta1)
 
 
 def left_pulley_updater(atwood: AtwoodMachine):
