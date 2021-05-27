@@ -73,8 +73,10 @@ class AtwoodMachine(VGroup):
         self.left_mass = Mass(radius=r1).set_style(**self.left_mass_style)
         self.right_mass = Mass(radius=r2).set_style(**self.right_mass_style)
 
-        self.left_mass.add_updater(lambda m: m.move_to(self.left_mass_center()))
-        self.right_mass.add_updater(lambda m: m.move_to(self.right_mass_center()))
+        self.left_mass.add_updater(
+            lambda m: m.move_to(self.left_mass_center()))
+        self.right_mass.add_updater(
+            lambda m: m.move_to(self.right_mass_center()))
 
         self.left_mass.get_center = self.left_mass_center
         self.right_mass.get_center = self.right_mass_center
