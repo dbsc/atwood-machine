@@ -9,10 +9,6 @@ If you can't see the figures and/or the equations, please checkout the [light th
   <img src="simulation.gif" width="600">
 </div>
 
-<div align="center">
-  <img src="ita_logo.gif" width="600">
-</div>
-
 ## Mathematical Background
 
 We'll derivate the equations of motion with the aid of [Lagrangian mechanics](https://en.wikipedia.org/wiki/Lagrangian_mechanics)
