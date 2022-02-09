@@ -1,6 +1,6 @@
 # Atwood Machine Simulation
 
-A simple simulation of an Atwood machine achieved with [manim](github.com).
+A simple simulation of an Atwood machine achieved with [manim](https://github.com/ManimCommunity/manim).
 
 <div align="center">
   <img src="simulation.gif" width="600">
