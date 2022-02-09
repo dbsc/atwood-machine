@@ -13,18 +13,6 @@ If you can't see the figures and/or the equations, please checkout the [light th
 
 We'll derivate the equations of motion with the aid of [Lagrangian mechanics](https://en.wikipedia.org/wiki/Lagrangian_mechanics)
 
-<!-- Dimesions of each image -->
-
-<!-- atwood_image 1082
-final_system 1170
-lagrangian_equation 202
-lagrangian_system 355
-L_equation 1178
-r 20
-relation_equation 418
-V_equation 1113
-x_variable 458 -->
-
 <div align="center">
   <img src="./tex/atwood_image_white.svg" width="450">
 </div>
